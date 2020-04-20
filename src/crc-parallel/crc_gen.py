@@ -8,8 +8,8 @@ class crcgen:
 		self.input_size = input_size
 		self.poly_size = poly_size
 	def calc_matrix(self):
-		print (self.input_size)
-		print (self.poly_size)
+		#print (self.input_size)
+		#print (self.poly_size)
 		x=np.zeros((self.poly_size,self.input_size),np.int32)
 		y=np.zeros((self.poly_size,self.input_size),np.int32)
 		z=np.zeros((self.poly_size,self.input_size),np.int32)
@@ -44,20 +44,25 @@ class crcgen:
 
 	def gen_code(self):
 		f=open("crc32.vhd","w");
+		f.write("entity crc32 is \n\tport(\n\t\ti_data : std_logic_vector(31 downto 0);\n\t\to_crc  : std_logic_vector(31 downto 0)\n\t);\nend entity;\n\narchitecture behavioral of crc32 is\n\tsignal d: std_logic_vector(31 downto 0);\n\tsignal c: std_logic_vector(31 downto 0);\nbegin\n\n  d<= i_data;\n  o_crc<= c;\n")
+
 		c=self.calc_matrix()
 		for j in range(self.poly_size):
-			f.write("c(")
+			f.write("  c(")
 			f.write(str(31-j))
 			f.write(")=")
 			for i in range(self.input_size):
 				if c[j,i] == 1:
 					f.write("d(")
-					f.write(str(i))
+					f.write(str(31-i))
 					f.write(")+")
-					#f.write("c(")
-					#f.write(str(i))
-					#f.write(")+")
+					f.write("c(")
+					f.write(str(31-i))
+					f.write(")")
+					if i < 31 :
+						f.write("+")
 			f.write(";\n")
+		f.write("\n\nend architecture ;")
 		return c
 			
 
@@ -70,4 +75,4 @@ crc= crcgen([0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,1,1,1,0,1,1,0,1,1,0,1,1,1],32
 #mat=crc.calc_matrix();
 mat=crc.gen_code();
 np.savetxt('coeff.txt',mat,fmt='%d')
-print(mat);
+#print(mat);
