@@ -1,4 +1,5 @@
-
+#Author: Vipin.VC
+#Script generates parallel crc equation for a given polinimial and data width
 import numpy as np
 
 
