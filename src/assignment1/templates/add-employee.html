@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>ABC Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/css/home.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <img src="/media/logo.jpeg" width="50"><a class="navbar-brand" href="#">ABC COMPANY</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li><a href="/adminhome/">Dashboard</a></li>
+           <li> <a href="/viewemployee/">View Employees</a></li>
+           <li> <a href="/logout/">Logout</a>
+          
+        </li>
+          
+        </li>
+
+      </ul>
+    </div>
+    
+  </div>
+</nav>
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center"><center>
+  <form action="/addemployee/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+
+    <table style="padding: 10px; " >
+        <tr><td colspan="10"><h3 class="margin" style="color: blue; font-size: 35pt;"> <b>ADD EMPLOYEE</b></h3><i style="color: green;">{{success}}</i><i style="co">{{fail}}</i></td></tr>
+        <tr><td><label> Name </label></td>
+            <td><i style="color: blue;"><input type="text" name="emp_name"></i></td>
+        </tr> 
+        <tr><td><label>Email </label></td>
+            <td><i style="color: blue;"><input type="email" name="email"></i></td>
+        </tr> 
+        <tr><td><label>Username </label></td>
+            <td><i style="color: blue;"><input type="text" name="username"></i></td>
+        </tr> 
+        <tr><td><label>Password</label></td>
+            <td><i style="color: blue;"><input type="password" name="password"></i></td>
+        </tr> 
+        <tr><td><label>Mobile number</label></td>
+            <td><i style="color: blue;"><input type="text" name="phone"></i></td>
+        </tr> 
+        <tr><td><label>Address </label></td>
+            <td><i style="color: blue;"><input type="text" name="address"></i></td>
+        </tr> 
+        <tr><td><label>Designation </label></td>
+            <td><i style="color: blue;"><input type="text" name="designation"></i></td>
+        </tr> 
+        <tr><td><label>DOB </label></td>
+            <td><i style="color: blue;"><input type="date" name="dob"></i></td>
+        </tr> 
+        <tr><td><label>DOJ </label></td>
+            <td><i style="color: blue;"><input type="date" name="doj"></i></td>
+        </tr> 
+        <tr><td><label>Salary </label></td>
+            <td><i style="color: blue;"><input type="number" name="salary"></i></td>
+        </tr> 
+        <tr><td>Photo<label></label></td>
+            <td><i style="color: blue;"><input type="file" name="photo"></i></td>
+        </tr> 
+        <tr><td>  </td></tr>
+        <tr><td colspan="10" style="text-align: center;"><b style="color: blue;"><input type="submit" value="Add"></b></td>
+           
+        </tr> 
+              
+    </table>
+
+  </form>
+</center>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>created by SAMRUDHA VC</p> 
+</footer>
+
+</body>
+</html>

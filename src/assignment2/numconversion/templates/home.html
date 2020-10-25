@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Number2Text conversion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+            $("input").keyup(function(){
+                $("input").css("background-color", "pink");
+                var number=document.getElementById("input").value;
+
+                intNum = parseInt(number);
+                if (intNum<0)
+                    $("#msg").css("color", "green");
+                    $("#msg").html("Negative numbers not allowed");
+                // else if(intNum<=1000000 && intNum>=0)
+                //     $("#msg").css("color", "green");
+                //     $("#msg").html("Valid Number");
+                else if(number>1000000)
+                    $("#msg").css("color", "green");
+                    $("#msg").html("Numbers Greater than 10 Lack not allowed");
+                else{
+                    $("#msg").css("color", "green");
+                    $("#msg").html("Valid Number");
+                }
+                
+        });
+      });
+     </script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body style="background-color: cyan;">
+        <div class="container-fluid" style="background-color: pink; text-align: center;">
+        <h1 style="color:blueviolet;">CONVERT NUMBER TO WORDS</h1>
+        <h6 style="color:brown">Included Text to speech</h6>
+        <br>
+    </div>
+    <div class="container-fluid">
+    <form action="/" method="POST" style="text-align: center;">  
+        {%csrf_token%}
+        <br>
+        <!-- <label>Enter the number : </label><input type="number" min="1" max="1000000" title="maximum upto 1000000"  name="input" id="input" value="{{input}}" > -->
+         <label>Enter the number : </label><input type="number"  name="input" id="input" pattern="[0-9]{7}" value="{{input}}" > 
+        <i style="color: red;" id="msg"></i>
+        <Br></Br>
+        <button type="submit" value="Convert To Text">Convert To Text</button>
+        <br><br>
+        {% if output %}
+        <label>Text format</label><input type="text" name='output' id="output" value="{{output}}"><br>
+        {% endif %}
+        {% if audiofile %}
+        <audio controls>
+            <source src="{{ audiofile }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+         </audio> 
+            
+         <br>Audio path: {{audiofile}}
+         {% endif %}
+    </form>
+</div>
+</body>
+</html>
