@@ -1,63 +1,93 @@
 <html>
     <head>
         <title>Number2Text conversion</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-            $("input").keyup(function(){
-                $("input").css("background-color", "pink");
-                var number=document.getElementById("input").value;
-
-                intNum = parseInt(number);
-                if (intNum<0)
-                    $("#msg").css("color", "green");
-                    $("#msg").html("Negative numbers not allowed");
-                // else if(intNum<=1000000 && intNum>=0)
-                //     $("#msg").css("color", "green");
-                //     $("#msg").html("Valid Number");
-                else if(number>1000000)
-                    $("#msg").css("color", "green");
-                    $("#msg").html("Numbers Greater than 10 Lack not allowed");
-                else{
-                    $("#msg").css("color", "green");
-                    $("#msg").html("Valid Number");
-                }
-                
-        });
-      });
-     </script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
+
     <body style="background-color: cyan;">
         <div class="container-fluid" style="background-color: pink; text-align: center;">
         <h1 style="color:blueviolet;">CONVERT NUMBER TO WORDS</h1>
         <h6 style="color:brown">Included Text to speech</h6>
         <br>
     </div>
-    <div class="container-fluid">
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
     <form action="/" method="POST" style="text-align: center;">  
+       
         {%csrf_token%}
-        <br>
-        <!-- <label>Enter the number : </label><input type="number" min="1" max="1000000" title="maximum upto 1000000"  name="input" id="input" value="{{input}}" > -->
-         <label>Enter the number : </label><input type="number"  name="input" id="input" pattern="[0-9]{7}" value="{{input}}" > 
-        <i style="color: red;" id="msg"></i>
-        <Br></Br>
-        <button type="submit" value="Convert To Text">Convert To Text</button>
-        <br><br>
-        {% if output %}
-        <label>Text format</label><input type="text" name='output' id="output" value="{{output}}"><br>
-        {% endif %}
-        {% if audiofile %}
-        <audio controls>
-            <source src="{{ audiofile }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-         </audio> 
+        <div class="row">
+            <br>
             
-         <br>Audio path: {{audiofile}}
-         {% endif %}
+            <div class="col-md-3"><label style="text-align:left;">Enter the number : </label></div>
+            <div class="col-md-2"><input type="number" class="form-control" style="text-align:left;" name="number" id="number" pattern="[0-9]{7}"  min="0" max="1000000" title="maximum upto 1000000" value="{{input}}" required>
+            </div>
+                 <div class="col-md-4" style="text-align:left;" ><i style="color: red;" id="msg"></i>    </div>
+        <br>
+        <br>
+        </div>
+    </div>
+
+        <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-1" style="text-align:right;"> <button type="submit" class="btn btn-danger" value="Convert To Text">Convert To Text</button></div>
+    <div class="col-md-6"></div>
+
+</div>
+
+<div class="row-md-1">
+    <br>
+    <div class="col-md-5" style="text-align: right;"><label>Text format : </label></div>
+    <div class="col-md-3"><input type="text" style="text-align:left;" class="form-control form-inline" name='output' id="output" value="{{output}}">
+    </div>    
+</div>
+
+</div>
+
+<div class="row-md-1">
+            <div class="col-md-5"></div>
+            <div class="col-md-1" style="text-align:right;">            <br>
+        <audio controls>
+            <source src="/media/{{audiofile}}" type="audio/mpeg">
+          </audio>
+        </div></div>
+
+
+
+
     </form>
+    </div>
+</div>
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+       $(document).ready(function(){
+
+$("input").keyup(function(){
+    $("#number").css("background-color", "yellow");
+    var number=document.getElementById("number").value;
+    intNum = parseInt(number);
+    if (intNum<0)
+    {
+        $("#msg").css("color", "red");
+        $("#msg").html("Negative numbers not allowed");
+    }
+    else if (intNum<=1000000)
+    {
+        $("#msg").css("color", "green");
+        $("#msg").html("valid number");
+    }
+else if (intNum>1000000)
+    {
+        $("#msg").css("color", "red");
+        $("#msg").html("Greater than 10Lack not allowed");
+    }
+});
+});
+ </script>
 </html>

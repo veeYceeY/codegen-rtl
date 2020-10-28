@@ -25,28 +25,36 @@ from django.shortcuts import render
 
 
 ################################# MANUAL CODE #############################
+import os
 
 def home(request):
     if request.method=='POST':
-        number=request.POST['input']
+        number=request.POST['number']
         #number to word coversion using manual function
         output=number2word(int(number)) 
         #text to speech conversion using gtts       
         import gtts
-        from playsound import playsound
+        # from playsound import playsound
         tts = gtts.gTTS(output)
-        tts.save("number.mp3")
-        # pathFile=tts.photo.path
-
+        tts.save("number.wav")
         #playing number.mp3 using python backend
-        import os
-        audiofile="number.mp3"
-        os.system("mpg123 " + audiofile)
+        os.system("mpg123 " + "number.wav")
+        ########################################################################
+        from django.conf import settings
+        from .models import converted
+        converted= converted.objects.get(id=1)
+        initial_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+"/"+"number.wav"
+        # initial_path = "/home/veeyceey/Documents/workspace/sammu/assignment2/number.wav"
+        print("===================================")
+        converted.audio.name = "number.wav"
 
-        pathFile=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+"/"+audiofile
-
+        new_path = settings.MEDIA_ROOT +"/" +converted.audio.name
+        # Move the file on the filesystem
+        os.rename(initial_path, new_path)
+        
+        # pathFile=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+"/"+"number.wav"
         #rendering response
-        return render(request,'home.html',{'output':output,'input':number,'audiofile':pathFile})
+        return render(request,'home.html',{'output':output,'input':number,'audiofile':"number.wav"})
     else:
         return render(request,'home.html')
 

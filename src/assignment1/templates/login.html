@@ -40,18 +40,33 @@
 <div class="container-fluid bg-1 text-center">
 
   <img src="/media/logo.jpeg" class="img-responsive img-circle margin" style="display:inline" alt="ABC COMPANY" width="350" height="350">
-<CENTER>
-  <form action="/login/" method="POST" >
+
+  <div class="container-fluid">
+<div class="col-md-3">  </div>
+<div class="col-md-6">
+  <div class="row">
+  <form action="/login/" method="POST"  class="form-horizontal">
     {% csrf_token %}
-    <table >
-       <tr><td>Username</td>
-      <td><i style="color: blue;"><input type="text" name="username"></i></td></tr> 
-<tr><td>Password</td><td><i style="color: blue;"> <input type="password" name="password"></i></td></tr>       
-      <tr><td colspan="10" style="text-align: center;"> <b style="color: blue;">  <input type="submit" value="Login"></b>
-     </td></tr> 
-    </table>
+
+    <div class="form-group">
+      <label class="control-label col-sm-5" for="usrrname">Username:</label>
+      <div class="col-sm-4"><input type="text" pattern="[a-A-z]{3,30}" title="upto 30 characters only" class="form-control" id="username" name="username"></div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-5" for="pwd">Password:</label>
+      <div class="col-sm-4"><input type="password"  class="form-control" name="password" id="pwd"><br></div>
+    </div>
+  </div>
+    <div class="form-group">
+      
+          <input type="submit" class="btn btn-primary" value="Login">
+    </div>
+  </div>
+
+  <div class="col-md-3"></div>
+  </div>
   </form>
-</CENTER>
+</div>
 </div>
 
 
